@@ -9,10 +9,10 @@ Base = declarative_base()
     
 
 class User(Base):
-    __tablename__ = 'User'
+    __tablename__ = 'user'
     user_id = Column(Integer, primary_key=True)
     email = Column(String, nullable=False)
-    fristname = Column(String, nullable=False)
+    firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     username = Column(String, nullable=False)
     password = Column(String, nullable=False)
@@ -34,7 +34,7 @@ class Comments(Base):
     post = relationship(Posts)
     user = relationship(User)
 
-class follower(Base):
+class Follower(Base):
     __tablename__ = 'follower'
     folower_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('User.user_id'))
