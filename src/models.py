@@ -10,7 +10,7 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = 'user'
-    user_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     email = Column(String, nullable=False)
     firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
@@ -19,26 +19,26 @@ class User(Base):
 
 class Posts(Base):
     __tablename__ = 'post'
-    post_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     body_post = Column(String, nullable=False)
-    user_id = Column(Integer, ForeignKey('User.user_id'), nullable=False)
-    comment = Column(String, ForeignKey('Comments.comment_id'),nullable=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    comment = Column(String, ForeignKey('comments.id'),nullable=True)
     user = relationship(User)
 
 class Comments(Base):
     __tablename__ = 'comments'
-    comment_id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('User.user_id'), nullable=False)
-    post_id = Column(Integer, ForeignKey('Posts.post_id'), nullable=False)
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    post_id = Column(Integer, ForeignKey('posts.id'), nullable=False)
     body_comment = Column(String, nullable=False)
     post = relationship(Posts)
     user = relationship(User)
 
 class Follower(Base):
     __tablename__ = 'follower'
-    folower_id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('User.user_id'))
-    user_folower_id= Column(Integer, ForeignKey('User.user_id'))
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    folower_id= Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
     folower = relationship(User)
 
